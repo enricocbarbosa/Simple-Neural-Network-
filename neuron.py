@@ -2,10 +2,10 @@ import random
 
 
 class Neuron:
-    def __init__(self, n_x:int):
+    def __init__(self, n_inputs:int):
         # w = list of weights, initially random, length passed as parameter (n_x)
         self.w = []
-        for i in range(n_x):
+        for i in range(n_inputs):
             self.w.append(random.uniform(-1, 1))
         self.b = 0
 
