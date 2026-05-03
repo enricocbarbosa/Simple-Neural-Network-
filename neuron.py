@@ -22,5 +22,11 @@ class Neuron:
 
         return z
 
-    def update(self, grad_w:float, grad_b:float, lr:float=0.001):
-        pass
+    def update(self, grad_w:list, grad_b:float, lr:float=0.001):
+        # Updating the weights
+        for i in range(len(self.w)):
+            self.w[i] -= grad_w[i] * lr
+
+        # Updating the bias
+        self.b -= grad_b * lr
+
