@@ -2,7 +2,7 @@ from neuron import Neuron
 
 
 class Layer:
-    def __init__(self, n_neurons:int, n_inputs:int):
+    def __init__(self, n_neurons: int, n_inputs: int):
         self.n_neurons = n_neurons
         self.n_inputs = n_inputs
         self.neurons = []
@@ -10,7 +10,7 @@ class Layer:
         for i in range(n_neurons):
             self.neurons.append(Neuron(n_inputs))
 
-    def forward(self, inputs:list) -> list:
+    def forward(self, inputs: list) -> list:
         # inputs = list with all the inputs
         # outputs = list with the output of each neuron
         self.inputs = inputs
@@ -20,7 +20,7 @@ class Layer:
 
         return outputs
 
-    def backward(self, gradients:list, lr:float=0.001) -> list:
+    def backward(self, gradients: list, lr: float=0.001) -> list:
         # gradients = list with the gradient for each neuron, came from the next layer
         # grad_w = list with other lists with a gradient for each weight of each neuron
         # grad_w_neuron = list with the gradient for each weight of a single neuron
@@ -51,7 +51,7 @@ class Layer:
 
         return grad_inputs
 
-    def update(self, grad_w:list, grad_b:list, lr:float=0.001):
+    def update(self, grad_w: list, grad_b: list, lr: float=0.001):
         # Loop to call the update for each neuron
         for i, neuron in enumerate(self.neurons):
             neuron.update(grad_w[i], grad_b[i], lr)

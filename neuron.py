@@ -2,14 +2,14 @@ import random
 
 
 class Neuron:
-    def __init__(self, n_inputs:int):
+    def __init__(self, n_inputs: int):
         # w = list of weights, initially random, length passed as parameter (n_x)
         self.w = []
         for i in range(n_inputs):
             self.w.append(random.uniform(-1, 1))
         self.b = 0
 
-    def forward(self, x:list) -> float:
+    def forward(self, x: list) -> float:
         # z = sum of the products of each input and its respective weight
         z = 0
         for i in range(len(self.w)):
@@ -22,7 +22,7 @@ class Neuron:
 
         return z
 
-    def update(self, grad_w:list, grad_b:float, lr:float=0.001):
+    def update(self, grad_w: list, grad_b: float, lr: float=0.001):
         # Updating the weights
         for i in range(len(self.w)):
             self.w[i] -= grad_w[i] * lr
