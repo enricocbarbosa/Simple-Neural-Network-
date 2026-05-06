@@ -3,7 +3,7 @@ from layer import Layer
 
 class NeuralNetwork:
     def __init__(self, layers: list):
-        # layers = [1, 8, 4, 1]
+        # layers = [1, 8, 4, 1] --> model
         # Creating all the layers passing the n of neurons and inputs
         self.layers = []
         for i in range(1, len(layers)):
@@ -16,8 +16,25 @@ class NeuralNetwork:
             inputs = layer_output.copy()
         return inputs
 
-    def backward(self):
-        pass
+    def backward(self, target, prediction, lr):
+        gradients = [self.mse_gradient(target, prediction)]
+        for layer in self.layers[::-1]:
+            gradients = layer.backward(gradients, lr)
 
-    def train(self):
-        pass
+    @staticmethod
+    def mse_gradient(target, prediction):
+        return prediction - target
+
+    @staticmethod
+    def mse(target, prediction):
+        return (prediction - target)**2
+
+    def train(self, inputs: list, targets: list, epochs: int=200, lr: float=0.01):
+        for i in range(epochs):
+            total_error = 0
+            for j in range(len(inputs)):
+                output = self.forward(inputs[j])
+                total_error += self.mse(targets[j], output)
+                self.backward(targets[j], output, lr)
+            if i % 20 == 0:
+                print(f"Epoch {i}: Loss = {total_error:.4f}")
