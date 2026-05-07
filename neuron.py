@@ -29,4 +29,3 @@ class Neuron:
 
         # Updating the bias
         self.b -= grad_b * lr
-
